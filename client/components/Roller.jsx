@@ -2,8 +2,6 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import Slot from './Slot'
 import Polygon, { getR } from '../modules/polygon'
-import { connect } from 'react-redux'
-import { sendRollerResult, spinMachine, requestMachineSpin, MACHINE_STATES } from '../store'
 import { times } from 'lodash'
 
 const HORIZONTAL_PERSPECTIVE = {
@@ -12,20 +10,12 @@ const HORIZONTAL_PERSPECTIVE = {
   right: -50
 }
 
-class Roller extends React.Component {
+export default class Roller extends React.Component {
   constructor(props) {
     super(props)
 
-    this.polygon = new Polygon(props.size, props.count)
+    this.polygon = new Polygon(props.height, props.count)
     this.spin = this.spin.bind(this)
-  }
-
-  componentDidMount() {}
-
-  componentDidUpdate() {
-    // if(this.props.machineState === MACHINE_STATES.spinRequested) {
-    //   this._spin()
-    // }
   }
 
   spin() {
@@ -70,58 +60,37 @@ class Roller extends React.Component {
     const { count } = this.props
 
     return times(count, n => {
-      return <Slot key={n} style={this._getSlotStyles(n)} number={n} />
+      return <Slot key={n} polygon={this.polygon} number={n} />
     })
   }
 
-  _getSlotStyles(n) {
-    const { translateZ, translateY, rotateX } = this.polygon.valuesFor(n)
-
-    return {
-      transform: `translateZ(${translateZ}px) translateY(${translateY}px) rotateX(${rotateX}deg)`
-    }
-  }
-
   _getRollerStyles() {
-    const { size, count } = this.props
+    const { width, height, count } = this.props
 
     return {
-      transformOrigin: `0 50% -${getR(size, count)}px`,
-      width: `${210}px`,
-      height: `${size}px`
+      transformOrigin: `0 50% -${getR(height, count)}px`,
+      width: `${width}px`,
+      height: `${height}px`
     }
   }
 
-  _getRollerWrapperStyles() {
-    const { position } = this.props
-
+  _getRollerWrapperStyles(position) {
     return {
       perspectiveOrigin: `${HORIZONTAL_PERSPECTIVE[position]}% 50%`
     }
   }
 
   render() {
+    const { position } = this.props
+
     return (
-      <div className="roller-wrapper" style={this._getRollerWrapperStyles()}>
-        <div className={`styles-roller-${this.props.position}`} />
-        <div className={`roller ${this.props.position}`} style={this._getRollerStyles()}>
+      <div className="roller-wrapper" style={this._getRollerWrapperStyles(position)}>
+        <div className={`styles-roller-${position}`} />
+
+        <div className={`roller ${position}`} style={this._getRollerStyles()}>
           {this._createSlots()}
         </div>
       </div>
     )
   }
 }
-
-const mapStateToProps = state => {
-  return {
-    roller: state.rollers,
-    machineState: state.game.machineState
-  }
-}
-
-export default connect(
-  mapStateToProps,
-  null,
-  null,
-  { withRef: true }
-)(Roller)

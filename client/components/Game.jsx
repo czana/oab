@@ -1,11 +1,9 @@
 import React from 'react'
 import Roller from './Roller'
-import { connect } from 'react-redux'
-import { spinMachine } from '../store'
 
 const ROLLERS = ['left', 'center', 'right']
 
-class Game extends React.Component {
+export default class Game extends React.Component {
   constructor(props) {
     super(props)
 
@@ -21,16 +19,23 @@ class Game extends React.Component {
   }
 
   _spinMachine() {
-    const spins = ROLLERS.map(roller => this[roller].current.getWrappedInstance().spin())
+    const spins = ROLLERS.map(roller => this[roller].current.spin())
 
     Promise.all(spins).then(function(values) {
-      console.log(values);
-    });
+      console.log(values)
+    })
   }
 
   _createRollers() {
     return ROLLERS.map(roller => (
-      <Roller key={roller} position={roller} ref={this[roller]} size={170} count={12} />
+      <Roller
+        key={roller}
+        ref={this[roller]}
+        position={roller}
+        height={170}
+        width={210}
+        count={12}
+      />
     ))
   }
 
@@ -43,12 +48,3 @@ class Game extends React.Component {
     )
   }
 }
-
-const mapStateToProps = state => {
-  return {
-    rollers: state.rollers,
-    machine: state.game
-  }
-}
-
-export default connect(mapStateToProps)(Game)
