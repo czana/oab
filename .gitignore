@@ -1,0 +1,14 @@
+*.log
+
+node_modules/
+
+.npm
+
+.eslintcache
+
+*.tgz
+
+.env
+
+.DS_Store
+

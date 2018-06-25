@@ -1,0 +1,56 @@
+$slot-background-color: #EFEFEF;
+
+#game {
+  width: 800px;
+  height: 480px;
+  background-color: $slot-background-color;
+  overflow: hidden;
+
+  // tmp
+  margin: 50px auto;
+
+  .rollers {
+    width: inherit;
+    height: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .roller-wrapper {
+    perspective: 580px;
+    margin: 10px
+  }
+
+  .roller {
+    position: relative;
+    transform-style: preserve-3d;
+  }
+
+  .slot {
+    width: inherit;
+    height: inherit;
+    position: absolute;
+    background-color: $slot-background-color;
+    backface-visibility: hidden;
+    border-top: 1px solid #666;
+    border-bottom: 2px solid #FFF;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      height: 85%;
+      width: auto;
+    }
+  }
+
+  .overlay {
+    position: absolute;
+    width: inherit;
+    height: inherit;
+    background-image: url('../images/slots.png');
+    z-index: 1;
+  }
+}
