@@ -1,8 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Slot from './Slot'
+import Animation from './Animation'
 import Polygon, { getR } from '../modules/polygon'
-import { times } from 'lodash'
+import { times, random } from 'lodash'
 
 const HORIZONTAL_PERSPECTIVE = {
   left: 150,
@@ -18,49 +19,42 @@ export default class Roller extends React.Component {
     this.spin = this.spin.bind(this)
   }
 
-  spin() {
+  spin(startingIndex = 0) {
     return new Promise(resolve => {
-      const angle = this.polygon.angle
-      const rand = () => Math.floor(Math.random() * 100) * angle
+      const { count, position } = this.props
 
-      const random = rand()
+      const rotations = random(15, 30)
+      const animationTime = random(3, 5, true)
+      const delay = random(0, 0.5, true)
 
-      const index = (random / angle) % this.props.count
-
-      const animTime = Math.random() * 3 + 2
-      const anim = ` animation: roller-${this.props.position} ${animTime}s ease forwards;`
+      const rollerElement = document.querySelector(`.roller.${position}`)
+      rollerElement.classList.remove('animate')
+      setTimeout(() => rollerElement.classList.add('animate'))
 
       setTimeout(() => {
-        // this.props.dispatch(sendRollerResult(this.props.position, index))
-        resolve(index)
-      }, animTime * 1000)
-
-      const ele = document.querySelector(`.roller.${this.props.position}`)
-      ele.classList.remove('animate')
-      // const styles = document.querySelector(`.roller.${this.props.position}`).getAttribute('style')
-      // document.querySelector(`.roller.${this.props.position}`).setAttribute('style', styles + anim)
+        resolve({ [position]: rotations % count })
+      }, (delay + animationTime) * 1000)
 
       ReactDOM.render(
-        <style>
-          {`.roller.animate.${this.props.position}{ ${anim} }`}
-
-          {`@keyframes roller-${this.props.position} {` +
-            ` 0% { transform: rotateX(0); }` +
-            ` 90% { transform: rotateX(${random + 5}deg); }` +
-            ` 100% { transform: rotateX(${random}deg); }`}
-        </style>,
-        document.querySelector(`.styles-roller-${this.props.position}`)
+        <Animation
+          startingIndex={0}
+          position={position}
+          animationTime={animationTime}
+          rotations={rotations}
+          angle={this.polygon.angle}
+          delay={2}
+          offset={5}
+        />,
+        document.querySelector(`.styles-roller-${position}`)
       )
-
-      setTimeout(() => ele.classList.add('animate'), 0)
     })
   }
 
   _createSlots() {
     const { count } = this.props
 
-    return times(count, n => {
-      return <Slot key={n} polygon={this.polygon} number={n} />
+    return times(count, number => {
+      return <Slot key={number} polygon={this.polygon} number={number} />
     })
   }
 

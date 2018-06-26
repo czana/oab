@@ -7,6 +7,8 @@ export default class Game extends React.Component {
   constructor(props) {
     super(props)
 
+    this.state = {}
+
     ROLLERS.forEach(roller => {
       this[roller] = React.createRef()
     })
@@ -15,14 +17,18 @@ export default class Game extends React.Component {
   componentDidMount() {
     setTimeout(() => {
       this._spinMachine()
-    }, 2000)
+    }, 1000)
   }
 
   _spinMachine() {
-    const spins = ROLLERS.map(roller => this[roller].current.spin())
+    const spins = ROLLERS.map(roller => this[roller].current.spin(this.state[roller]))
 
-    Promise.all(spins).then(function(values) {
-      console.log(values)
+    Promise.all(spins).then(results => {
+      this.setState(Object.values(results).reduce((a, v) => ({ ...a, ...v }), {}))
+
+      setTimeout(() => {
+        this._spinMachine()
+      }, 1000)
     })
   }
 
