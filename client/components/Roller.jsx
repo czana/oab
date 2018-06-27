@@ -5,12 +5,6 @@ import Animation from './Animation'
 import Polygon, { getR } from '../modules/polygon'
 import { times, random } from 'lodash'
 
-const HORIZONTAL_PERSPECTIVE = {
-  left: 150,
-  center: 50,
-  right: -50
-}
-
 export default class Roller extends React.Component {
   constructor(props) {
     super(props)
@@ -23,12 +17,8 @@ export default class Roller extends React.Component {
     return new Promise(resolve => {
       const { count, position } = this.props
 
-      const rotations = random(20, 40)
+      const rotations = random(30, 50)
       const animationTime = random(3, 5, true)
-
-      const rollerElement = document.querySelector(`.roller.${position}`)
-      rollerElement.classList.remove('animate')
-      setTimeout(() => rollerElement.classList.add('animate'))
 
       setTimeout(() => {
         resolve({ [position]: (startingIndex + rotations) % count })
@@ -49,9 +39,7 @@ export default class Roller extends React.Component {
   }
 
   _createSlots() {
-    const { count } = this.props
-
-    return times(count, number => {
+    return times(this.props.count, number => {
       return <Slot key={number} polygon={this.polygon} number={number} />
     })
   }
@@ -76,7 +64,7 @@ export default class Roller extends React.Component {
     const { position } = this.props
 
     return (
-      <div className="roller-wrapper" style={this._getRollerWrapperStyles(position)}>
+      <div className={`roller-wrapper ${position}`}>
         <div className={`styles-roller-${position}`} />
 
         <div className={`roller ${position}`} style={this._getRollerStyles()}>

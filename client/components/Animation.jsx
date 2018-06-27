@@ -1,10 +1,11 @@
 import React from 'react'
 
 export default class Animation extends React.Component {
-  componentDidMount() {
-    // const rollerElement = document.querySelector(`.roller.${this.props.position}`)
-    // rollerElement.classList.remove('animate')
-    // setTimeout(() => rollerElement.classList.add('animate'))
+
+  _setAnimation(position) {
+    const rollerElement = document.querySelector(`.roller.${position}`)
+    rollerElement.classList.remove('animate')
+    setTimeout(() => rollerElement.classList.add('animate'))
   }
 
   render() {
@@ -13,6 +14,8 @@ export default class Animation extends React.Component {
     const startingRotationInDegree = startingIndex * angle
     const rotationInDegree = startingRotationInDegree + (rotations * angle)
     const animation = `roller-${position} ${animationTime}s ease forwards`
+
+    this._setAnimation(position)
 
     return (
       <style>

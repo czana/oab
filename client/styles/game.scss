@@ -16,7 +16,19 @@
 
   .roller-wrapper {
     perspective: 580px;
-    margin: 10px
+    margin: 10px;
+
+    &.left {
+      perspective-origin: 150%;
+    }
+
+    &.center {
+      perspective-origin: 50%;
+    }
+
+    &.right {
+      perspective-origin: -50%;
+    }
   }
 
   .roller {

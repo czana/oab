@@ -1,35 +1,20 @@
 import React from 'react'
 import Roller from './Roller'
 import socketIOClient from 'socket.io-client'
+import { logResult } from '../modules/result'
 
 const ROLLERS = ['left', 'center', 'right']
-
-const ICONS = [
-  'Seven',
-  'Cherry',
-  'Diamond',
-  'Lemon',
-  'Horseshoe',
-  'Bag',
-  'Orange',
-  'Plum',
-  'Bar',
-  'Watermelon',
-  'Cloverleaf',
-  'Bell'
-]
 
 export default class Game extends React.Component {
   constructor(props) {
     super(props)
 
     this.state = {}
+    this.socket = socketIOClient('http://localhost:3000')
 
     ROLLERS.forEach(roller => {
       this[roller] = React.createRef()
     })
-
-    this.socket = socketIOClient('http://localhost:3000')
   }
 
   componentDidMount() {
@@ -40,18 +25,13 @@ export default class Game extends React.Component {
     const spins = ROLLERS.map(roller => this[roller].current.spin(this.state[roller]))
 
     Promise.all(spins).then(results => {
-      const state = this._formatResults(results)
+      const state = Object.values(results).reduce((a, v) => ({ ...a, ...v }), {})
+      this.setState(state)
 
-      console.log(ICONS[state.left], ICONS[state.center], ICONS[state.right])
+      logResult(state)
 
       this.socket.emit('SPIN_ENDED', state)
-
-      this.setState(state)
     })
-  }
-
-  _formatResults(results) {
-    return Object.values(results).reduce((a, v) => ({ ...a, ...v }), {})
   }
 
   _createRollers() {
