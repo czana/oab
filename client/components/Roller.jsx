@@ -23,26 +23,24 @@ export default class Roller extends React.Component {
     return new Promise(resolve => {
       const { count, position } = this.props
 
-      const rotations = random(15, 30)
+      const rotations = random(20, 40)
       const animationTime = random(3, 5, true)
-      const delay = random(0, 0.5, true)
 
       const rollerElement = document.querySelector(`.roller.${position}`)
       rollerElement.classList.remove('animate')
       setTimeout(() => rollerElement.classList.add('animate'))
 
       setTimeout(() => {
-        resolve({ [position]: rotations % count })
-      }, (delay + animationTime) * 1000)
+        resolve({ [position]: (startingIndex + rotations) % count })
+      }, animationTime * 1000 + 500)
 
       ReactDOM.render(
         <Animation
-          startingIndex={0}
+          startingIndex={startingIndex}
           position={position}
           animationTime={animationTime}
           rotations={rotations}
           angle={this.polygon.angle}
-          delay={2}
           offset={5}
         />,
         document.querySelector(`.styles-roller-${position}`)
