@@ -54,12 +54,6 @@ export default class Roller extends React.Component {
     }
   }
 
-  _getRollerWrapperStyles(position) {
-    return {
-      perspectiveOrigin: `${HORIZONTAL_PERSPECTIVE[position]}% 50%`
-    }
-  }
-
   render() {
     const { position } = this.props
 

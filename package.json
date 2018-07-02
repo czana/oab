@@ -9,9 +9,12 @@
   "author": "c4",
   "license": "MIT",
   "dependencies": {
+    "dotenv": "^6.0.0",
     "express": "^4.16.3",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
+    "redis": "^2.8.0",
+    "slack-webhook": "^1.0.0",
     "socket.io": "^2.1.1",
     "socket.io-client": "^2.1.1"
   },
