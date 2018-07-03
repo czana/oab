@@ -13,12 +13,16 @@ export default class Roller extends React.Component {
     this.spin = this.spin.bind(this)
   }
 
-  spin(startingIndex = 0) {
+  spin(startingIndex = 0, forcedSpinTo) {
     return new Promise(resolve => {
       const { count, position } = this.props
 
-      const rotations = random(30, 50)
+      let rotations = random(30, 50)
       const animationTime = random(3, 5, true)
+
+      if (isFinite(forcedSpinTo)) {
+        rotations = 3 * count + forcedSpinTo - startingIndex
+      }
 
       setTimeout(() => {
         resolve({ [position]: (startingIndex + rotations) % count })

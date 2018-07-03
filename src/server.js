@@ -31,21 +31,10 @@ server.listen(3000)
 
 const io = socketIO(server)
 
-let counter = 0
-let winCounter = 0
 io.on('connection', client => {
   client.emit('SPIN_REQUEST')
 
   client.on('SPIN_ENDED', result => {
-    counter++
-
-    if(counter % 100 === 0) console.log(counter)
-
-    if (result.win) {
-      winCounter++
-      console.log(result, counter, winCounter)
-    }
-
     client.emit('SPIN_REQUEST')
   })
 })

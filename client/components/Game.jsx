@@ -18,11 +18,11 @@ export default class Game extends React.Component {
   }
 
   componentDidMount() {
-    this.socket.on('SPIN_REQUEST', () => this._spinMachine())
+    this.socket.on('SPIN_REQUEST', forcedSpinTo => this._spinMachine(forcedSpinTo))
   }
 
-  _spinMachine() {
-    const spins = ROLLERS.map(roller => this[roller].current.spin(this.state[roller]))
+  _spinMachine(forcedSpinTo) {
+    const spins = ROLLERS.map(roller => this[roller].current.spin(this.state[roller], forcedSpinTo))
 
     Promise.all(spins).then(results => {
       const state = Object.values(results).reduce((a, v) => ({ ...a, ...v }), {})
