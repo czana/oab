@@ -1,7 +1,7 @@
 import React from 'react'
 import Roller from './Roller'
 import socketIOClient from 'socket.io-client'
-import { logResult } from '../modules/result'
+import { logResult, resultResponse } from '../modules/result'
 
 const ROLLERS = ['left', 'center', 'right']
 
@@ -28,9 +28,7 @@ export default class Game extends React.Component {
       const state = Object.values(results).reduce((a, v) => ({ ...a, ...v }), {})
       this.setState(state)
 
-      logResult(state)
-
-      this.socket.emit('SPIN_ENDED', state)
+      this.socket.emit('SPIN_ENDED', resultResponse(state))
     })
   }
 
@@ -42,7 +40,7 @@ export default class Game extends React.Component {
         position={roller}
         height={170}
         width={210}
-        count={12}
+        count={10}
       />
     ))
   }
