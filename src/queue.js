@@ -3,39 +3,45 @@ import axios from 'axios'
 
 const queue = kue.createQueue()
 
-const getImageUrl = email => {
+const getSignedUrl = email => {
   const data = {
     contentType: 'image/png',
     email: email
   }
 
-  axios
-    .post('URL', data, {
-      headers: { Authorization: `Barer: API_KEY` }
-    })
-    .then(response => {
-      console.log('yey 1', response)
-      putImage(response.url, email)
-    })
+  const options = {
+    headers: { Authorization: `Barer: API_KEY` }
+  }
+
+  return axios.post('URL', data, options)
 }
 
-const putImage = (url, email) => {
+const putImage = url => {
   const file = 1
 
-  axios.put(url, file).then(response => {
-    console.log('yey 2', response)
-  })
+  return axios.put(url, file)
 }
 
 queue.process('image', (job, done) => {
-  done()
+  const { email, pathToFile } = job.data
+
+  const file = pathToFile // tmp
+
+  getSignedUrl(email).then(res => {
+    job.progress(50)
+
+    putImage(res.url, file).then(res => {
+      console.log(yey, res)
+      done()
+    })
+  })
 })
 
-export const sendImage = (path, email) => {
+export const sendImage = (email, pathToFile) => {
   queue
     .create('image', {
-      path: path,
-      email: email
+      email: email,
+      pathToFile: path
     })
     .attempts(3)
     .save()
