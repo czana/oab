@@ -24,7 +24,10 @@ const port = new SerialPort('/dev/ttyUSB0', {
 
 const parser = port.pipe(new Readline({ delimiter: '\n', encoding: 'ASCII' }))
 
+const client = null
+
 parser.on('data', data => {
+  console.log(data)
   const id = data.replace(/[^0-9A-Fa-f]+/g, '')
 
   client.emit('NOTIFY', 'success', id)
@@ -66,11 +69,13 @@ server.listen(3000)
 //   })
 // }, 3000)
 
-// io.on('connection', client => {
-//   client.emit('SPIN_REQUEST')
+io.on('connection', client => {
+  console.log('client connected')
+  client = client
+  // client.emit('SPIN_REQUEST')
 
-//   client.on('SPIN_ENDED', result => {
-//     // client.emit('NOTIFY', 'success', 'Another Spin!')
-//     client.emit('SPIN_REQUEST')
-//   })
-// })
+  // client.on('SPIN_ENDED', result => {
+  //   // client.emit('NOTIFY', 'success', 'Another Spin!')
+  //   client.emit('SPIN_REQUEST')
+  // })
+})
