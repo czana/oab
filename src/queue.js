@@ -3,22 +3,20 @@ import axios from 'axios'
 
 const queue = kue.createQueue()
 
-const getSignedUrl = email => {
+export const getSignedUrl = email => {
   const data = {
     contentType: 'image/png',
     email: email
   }
 
   const options = {
-    headers: { Authorization: `Barer: API_KEY` }
+    headers: { Authorization: `Barer 697b98da8795cec063839b96b6d125e5` }
   }
 
-  return axios.post('URL', data, options)
+  return axios.post('http://50-faces-of-selleo-dev.eu-west-1.elasticbeanstalk.com/reference-images/sign', data, options)
 }
 
-const putImage = url => {
-  const file = 1
-
+export const putImage = (url, file) => {
   return axios.put(url, file)
 }
 

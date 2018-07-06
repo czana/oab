@@ -18,7 +18,7 @@ export default class Roller extends React.Component {
       const { count, position } = this.props
 
       let rotations = random(30, 50)
-      const animationTime = random(3, 5, true)
+      const animationTime = random(3, 6, true)
 
       if (isFinite(forcedSpinTo)) {
         rotations = 3 * count + forcedSpinTo - startingIndex

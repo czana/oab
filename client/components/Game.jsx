@@ -2,6 +2,7 @@ import React from 'react'
 import Roller from './Roller'
 import socketIOClient from 'socket.io-client'
 import { logResult, resultResponse } from '../modules/result'
+import { ToastContainer, toast } from 'react-toastify'
 
 const ROLLERS = ['left', 'center', 'right']
 
@@ -19,6 +20,11 @@ export default class Game extends React.Component {
 
   componentDidMount() {
     this.socket.on('SPIN_REQUEST', forcedSpinTo => this._spinMachine(forcedSpinTo))
+    this.socket.on('NOTIFY', (type, message) => toast[type](message))
+
+    // toast.success("Success Notification!", {
+    //   position: toast.POSITION.TOP_CENTER
+    // });
   }
 
   _spinMachine(forcedSpinTo) {
@@ -48,6 +54,7 @@ export default class Game extends React.Component {
   render() {
     return (
       <div className="rollers">
+        <ToastContainer autoClose={3000} position={toast.POSITION.TOP_CENTER} />
         <div className="overlay" />
         {this._createRollers()}
       </div>
