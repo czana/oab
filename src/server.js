@@ -24,7 +24,7 @@ const port = new SerialPort('/dev/ttyUSB0', {
 
 const parser = port.pipe(new Readline({ delimiter: '\n', encoding: 'ASCII' }))
 
-const client = null
+const ioClient = null
 
 parser.on('data', data => {
   console.log(data)
@@ -71,7 +71,7 @@ server.listen(3000)
 
 io.on('connection', client => {
   console.log('client connected')
-  client = client
+  ioClient = client
   // client.emit('SPIN_REQUEST')
 
   // client.on('SPIN_ENDED', result => {
