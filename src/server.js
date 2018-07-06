@@ -13,28 +13,6 @@ import redis from 'redis'
 import Slack from './slack'
 import { sendImage, getSignedUrl, putImage } from './queue'
 
-const io = socketIO(server)
-
-import SerialPort from 'serialport'
-const Readline = SerialPort.parsers.Readline
-
-const port = new SerialPort('/dev/ttyUSB0', {
-  baudRate: 9600
-})
-
-const parser = port.pipe(new Readline({ delimiter: '\n', encoding: 'ASCII' }))
-
-const ioClient = null
-
-parser.on('data', data => {
-  console.log(data)
-  const id = data.replace(/[^0-9A-Fa-f]+/g, '')
-
-  client.emit('NOTIFY', 'success', id)
-  client.emit('SPIN_REQUEST')
-  // console.log(parseInt(datap, 16));
-})
-
 const redisClient = redis.createClient()
 const slack = new Slack(process.env.SLACK_WEBHOOK)
 
@@ -68,6 +46,28 @@ server.listen(3000)
 //     }
 //   })
 // }, 3000)
+
+const io = socketIO(server)
+
+import SerialPort from 'serialport'
+const Readline = SerialPort.parsers.Readline
+
+const port = new SerialPort('/dev/ttyUSB0', {
+  baudRate: 9600
+})
+
+const parser = port.pipe(new Readline({ delimiter: '\n', encoding: 'ASCII' }))
+
+const ioClient = null
+
+parser.on('data', data => {
+  console.log(data)
+  const id = data.replace(/[^0-9A-Fa-f]+/g, '')
+
+  ioClient.emit('NOTIFY', 'success', id)
+  ioClient.emit('SPIN_REQUEST')
+  // console.log(parseInt(datap, 16));
+})
 
 io.on('connection', client => {
   console.log('client connected')
