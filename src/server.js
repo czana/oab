@@ -72,7 +72,7 @@ const port = new SerialPort('/dev/ttyUSB0', {
 
 const parser = port.pipe(new Readline({ delimiter: '\n', encoding: 'ASCII' }))
 
-const ioClient = null
+let ioClient = null
 
 parser.on('data', data => {
   console.log(data)
