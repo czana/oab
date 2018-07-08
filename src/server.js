@@ -12,9 +12,23 @@ import socketIO from 'socket.io'
 import redis from 'redis'
 import Slack from './slack'
 import { sendImage, getSignedUrl, putImage } from './queue'
+import PiCamera from 'pi-camera'
 
 const redisClient = redis.createClient()
 const slack = new Slack(process.env.SLACK_WEBHOOK)
+
+const camera = new PiCamera({
+  mode: 'photo',
+  output: `${__dirname}/test.png`,
+  width: 1280,
+  height: 720,
+  nopreview: true,
+  encoding: 'png'
+})
+
+camera.snap().then(result => {
+  console.log(result)
+})
 
 // redisClient.on('connect', function() {
 //   setInterval(() => {
