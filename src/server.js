@@ -52,12 +52,13 @@ reader.on('data', data => {
 
   if (readyForSpin) {
     redisClient.set(id, true, 'EX', 60, 'NX', (_, response) => {
-      if (response !== null) {
+      if (true) {
+      // if (response !== null) {
         readyForSpin = false
         socketClient.emit('SPIN_REQUEST')
 
-        takePhoto(id).then(buffer => {
-          sendPhoto(user.email, buffer)
+        takePhoto(id).then(_ => {
+          sendPhoto(user.email, id)
         })
       } else {
         socketClient.emit('NOTIFY', 'warn', 'not yet :)')

@@ -1,5 +1,6 @@
 import kue from 'kue'
 import axios from 'axios'
+import { fileDir } from './camera'
 
 const queue = kue.createQueue()
 
@@ -25,13 +26,15 @@ const putImage = (url, file) => {
 }
 
 queue.process('image', (job, done) => {
-  const { email, buffer } = job.data
+  const { email, id } = job.data
 
   getSignedUrl(email).then(res => {
     console.log('signed', res.status)
 
     if (res.status === 200) {
-      putImage(res.data.url, buffer.toString('binary')).then(res => {
+      const binary = fs.readFileSync(fileDir() + `/${id}.png`)
+
+      putImage(res.data.url, binary).then(res => {
         console.log('put', res.status)
         done()
       })
@@ -39,11 +42,11 @@ queue.process('image', (job, done) => {
   })
 })
 
-export default (email, buffer) => {
+export default (email, id) => {
   queue
     .create('image', {
       email: email,
-      buffer: buffer
+      id: id
     })
     .attempts(3)
     .save()
