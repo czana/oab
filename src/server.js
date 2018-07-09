@@ -55,7 +55,8 @@ reader.on('data', data => {
       if (true) {
       // if (response !== null) {
         readyForSpin = false
-        socketClient.emit('SPIN_REQUEST')
+
+        socketClient.emit('SPIN_REQUEST', user.index)
 
         takePhoto(id).then(_ => {
           sendPhoto(user.email, id)

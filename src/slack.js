@@ -8,7 +8,7 @@ export default class Slack {
   }
 
   post(winner, icon, reward) {
-    const result = times(3, () => `:${icon}:`)
+    const result = times(3, () => `:slot_${icon}:`)
 
     this.slack.send({
       text: `<!here> <@${winner}> just got ${result} and won ${reward}!`,
