@@ -31,7 +31,7 @@ queue.process('image', (job, done) => {
     console.log('signed', res.status)
 
     if (res.status === 200) {
-      putImage(res.data.url, buffer).then(res => {
+      putImage(res.data.url, buffer.toString('binary')).then(res => {
         console.log('put', res.status)
         done()
       })

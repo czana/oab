@@ -19,16 +19,9 @@ export const logResult = state => {
 
 export const resultResponse = result => {
   const uniqResult = uniq(Object.values(result))
+  const win = uniqResult.length == 1
+  const icon = win ? ICONS[uniqResult[0]] : null
+  const cashPrize = icon === 'seven'
 
-  if (uniqResult.length == 1) return win(ICONS[uniqResult[0]])
-
-  return lost()
-}
-
-const win = icon => {
-  return { win: true, icon: icon }
-}
-
-const lost = () => {
-  return { win: false }
+  return { win, icon, cashPrize }
 }

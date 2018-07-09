@@ -34,7 +34,7 @@ io.on('connection', client => {
     readyForSpin = true
 
     if (result.win) {
-      const reward = result.icon === 'seven' ? '$$$' : '2 Kudos!'
+      const reward = result.cashPrize ? '$$$' : '2 Kudos!'
       slack.post('czana', result.icon, reward)
     }
   })
