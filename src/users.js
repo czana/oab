@@ -8,7 +8,7 @@ const USERS = {
     mention: 'bart',
     email: 'b.wojtowicz@selleo.com'
   },
-  55014128126783: {
+  5501412812678: {
     mention: 'p.kuwik',
     email: 'p.kuwik@selleo.com'
   }
