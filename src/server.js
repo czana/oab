@@ -1,19 +1,17 @@
 require('dotenv').config()
 
 import express from 'express'
-import http from 'http'
-import webpack from 'webpack'
-import webpackMiddleware from 'webpack-dev-middleware'
-import webpackConfig from '../webpack.config.js'
-import fs from 'fs'
-import socketIO from 'socket.io'
-import redis from 'redis'
-import Slack from './slack'
-import sendPhoto from './queue'
-import reader, { parseData } from './rfid'
 import getUser from './users'
+import http from 'http'
+import reader, { parseData } from './rfid'
+import redis from 'redis'
+import sendPhoto from './queue'
+import Slack from './slack'
+import socketIO from 'socket.io'
 import takePhoto from './camera'
-import kue from 'kue'
+import webpack from 'webpack'
+import webpackConfig from '../webpack.config.js'
+import webpackMiddleware from 'webpack-dev-middleware'
 
 const app = express()
 const server = http.createServer(app)
@@ -26,7 +24,6 @@ let readyForSpin = false
 let socketClient = null
 
 app.use(webpackMiddleware(webpack(webpackConfig)))
-kue.app.listen(4000);
 server.listen(3000)
 
 io.on('connection', client => {
@@ -35,6 +32,11 @@ io.on('connection', client => {
 
   client.on('SPIN_ENDED', result => {
     readyForSpin = true
+
+    if (result.win) {
+      const reward = result.icon === 'seven' ? '$$$' : '2 Kudos!'
+      slack.post('czana', result.icon, reward)
+    }
   })
 })
 
@@ -49,21 +51,17 @@ reader.on('data', data => {
   }
 
   if (readyForSpin) {
-    readyForSpin = false
-    socketClient.emit('SPIN_REQUEST')
+    redisClient.set(id, true, 'EX', 60, 'NX', (_, response) => {
+      if (response !== null) {
+        readyForSpin = false
+        socketClient.emit('SPIN_REQUEST')
 
-    takePhoto(id).then((buffer) => {
-      sendPhoto(user.email, buffer)
+        takePhoto(id).then(buffer => {
+          sendPhoto(user.email, buffer)
+        })
+      } else {
+        socketClient.emit('NOTIFY', 'warn', 'not yet :)')
+      }
     })
   }
 })
-
-// redisClient.on('connect', function() {
-//   setInterval(() => {
-//     redisClient.set('ID_3', true, 'EX', 120, 'NX', (_, response) => {
-//       if (response !== null) {
-//         slack.post('czana', 'awthanks', '50zl')
-//       }
-//     })
-//   }, 2000)
-// })

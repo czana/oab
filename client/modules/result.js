@@ -1,16 +1,16 @@
 import { uniq } from 'lodash'
 
 const ICONS = [
-  'Seven',
-  'Cherry',
-  'Diamond',
-  'Lemon',
-  'Horseshoe',
-  'Cloverleaf',
-  'Orange',
-  'Plum',
-  'Bell',
-  'Watermelon'
+  'seven',
+  'cherry',
+  'diamond',
+  'lemon',
+  'horseshoe',
+  'cloverleaf',
+  'orange',
+  'plum',
+  'bell',
+  'watermelon'
 ]
 
 export const logResult = state => {
