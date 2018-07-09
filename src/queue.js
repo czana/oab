@@ -1,6 +1,7 @@
-import kue from 'kue'
 import axios from 'axios'
 import { fileDir } from './camera'
+import fs from 'fs'
+import kue from 'kue'
 
 const queue = kue.createQueue()
 
