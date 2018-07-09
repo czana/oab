@@ -7,10 +7,12 @@ export const filePath = (id) => {
 export default id => {
   return new Raspistill({
     mode: 'photo',
-    fileName: filePath(id),
+    outputDir: './images',
+    fileName: `${id}.png`,
     width: 1280,
     height: 720,
     encoding: 'png',
-    time: 1000
+    time: 1000,
+    shutterspeed: 10000
   }).takePhoto()
 }
