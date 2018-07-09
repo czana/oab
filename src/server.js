@@ -23,6 +23,7 @@ const slack = new Slack(process.env.SLACK_WEBHOOK, process.env.SLACK_WEBHOOK)
 
 let readyForSpin = false
 let socketClient = null
+let user = null
 
 app.use(webpackMiddleware(webpack(webpackConfig)))
 server.listen(3000)
@@ -36,14 +37,14 @@ io.on('connection', client => {
 
     if (result.win) {
       const reward = result.cashPrize ? '$$$' : '2 Kudos!'
-      slack.post('czana', result.icon, reward)
+      slack.post(user.mention, result.icon, reward)
     }
   })
 })
 
 reader.on('data', data => {
   const id = parseData(data)
-  const user = getUser(id)
+  user = getUser(id)
 
   if (user === undefined) {
     slack.log(id)
@@ -57,12 +58,14 @@ reader.on('data', data => {
       // if (response !== null) {
         readyForSpin = false
 
-        servo.move() // tmp
-
-        socketClient.emit('SPIN_REQUEST', user.index)
+        if(isFinite(user.index)) {
+          socketClient.emit('SPIN_REQUEST', user.index)
+        } else {
+          socketClient.emit('SPIN_REQUEST')
+        }
 
         takePhoto(id).then(_ => {
-          sendPhoto(user.email, id)
+          // sendPhoto(user.email, id)
         })
       } else {
         socketClient.emit('NOTIFY', 'warn', 'not yet :)')
