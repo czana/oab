@@ -1,16 +1,16 @@
-import PiCamera from 'pi-camera'
+import { Raspistill } from 'node-raspistill'
 
 export const filePath = (id) => {
   return `./images/${id}.png`
 }
 
 export default id => {
-  return new PiCamera({
+  return new Raspistill({
     mode: 'photo',
-    output: filePath(id),
+    fileName: filePath(id),
     width: 1280,
     height: 720,
-    nopreview: true,
-    encoding: 'png'
-  }).snap()
+    encoding: 'png',
+    time: 1000
+  }).takePhoto()
 }

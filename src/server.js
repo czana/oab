@@ -50,7 +50,9 @@ reader.on('data', data => {
     readyForSpin = false
     socketClient.emit('SPIN_REQUEST')
 
-    takePhoto(id).then(() => {})
+    takePhoto(id).then((photo) => {
+      console.log(photo)
+    })
   }
 })
 
