@@ -7,10 +7,10 @@ class Servo {
   }
 
   move(delay) {
-    this.servo.writeSync(Gpio.High)
+    this.servo.writeSync(Gpio.HIGH)
 
     setTimeout(() => {
-      this.servo.writeSync(Gpio.Low)
+      this.servo.writeSync(Gpio.LOW)
     }, delay)
   }
 }
