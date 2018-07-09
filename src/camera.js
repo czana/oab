@@ -1,14 +1,16 @@
 import PiCamera from 'pi-camera'
 
-const camera = new PiCamera({
-  mode: 'photo',
-  output: `./images/test.png`,
-  width: 1280,
-  height: 720,
-  nopreview: true,
-  encoding: 'png'
-})
+export const filePath = (id) => {
+  return `./images/${id}.png`
+}
 
-camera.snap().then(result => {
-  console.log(result)
-})
+export default id => {
+  return new PiCamera({
+    mode: 'photo',
+    output: filePath(id),
+    width: 1280,
+    height: 720,
+    nopreview: true,
+    encoding: 'png'
+  }).snap()
+}

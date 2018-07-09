@@ -12,6 +12,7 @@ import Slack from './slack'
 import { sendImage, getSignedUrl, putImage } from './queue'
 import reader, { parseData } from './rfid'
 import getUser from './users'
+import takePhoto, { filePath } from './camera'
 
 const app = express()
 const server = http.createServer(app)
@@ -48,6 +49,8 @@ reader.on('data', data => {
   if (readyForSpin) {
     readyForSpin = false
     socketClient.emit('SPIN_REQUEST')
+
+    takePhoto(id).then(() => {})
   }
 })
 
@@ -61,7 +64,6 @@ reader.on('data', data => {
 //   }, 2000)
 // })
 
-// setTimeout(() => {
 //   getSignedUrl('example@selleo.com').then((res) => {
 //     // console.log(res.status, res.data.url)
 
@@ -74,4 +76,3 @@ reader.on('data', data => {
 //       })
 //     }
 //   })
-// }, 3000)
