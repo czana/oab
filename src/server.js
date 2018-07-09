@@ -36,9 +36,8 @@ io.on('connection', client => {
     readyForSpin = true
 
     if (result.win) {
-      const reward = result.cashPrize ? '$$$' : '2 Kudos!'
-      servo.move()
-      slack.post(user.mention, result.icon, reward)
+      if (result.cashPrize) servo.move()
+      slack.post(user.mention, result.icon, result.cashPrize ? '$$$' : '2 Kudos!')
     }
   })
 })
@@ -56,10 +55,10 @@ reader.on('data', data => {
   if (readyForSpin) {
     redisClient.set(id, true, 'EX', 60, 'NX', (_, response) => {
       if (true) {
-      // if (response !== null) {
+        // if (response !== null) {
         readyForSpin = false
 
-        if(isFinite(user.index)) {
+        if (isFinite(user.index)) {
           socketClient.emit('SPIN_REQUEST', user.index)
         } else {
           socketClient.emit('SPIN_REQUEST')
