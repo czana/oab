@@ -9,10 +9,11 @@ import fs from 'fs'
 import socketIO from 'socket.io'
 import redis from 'redis'
 import Slack from './slack'
-import { sendImage, getSignedUrl, putImage } from './queue'
+import sendPhoto from './queue'
 import reader, { parseData } from './rfid'
 import getUser from './users'
-import takePhoto, { filePath } from './camera'
+import takePhoto from './camera'
+import kue from 'kue'
 
 const app = express()
 const server = http.createServer(app)
@@ -25,6 +26,7 @@ let readyForSpin = false
 let socketClient = null
 
 app.use(webpackMiddleware(webpack(webpackConfig)))
+kue.app.listen(4000);
 server.listen(3000)
 
 io.on('connection', client => {
@@ -50,8 +52,8 @@ reader.on('data', data => {
     readyForSpin = false
     socketClient.emit('SPIN_REQUEST')
 
-    takePhoto(id).then((photo) => {
-      console.log(photo)
+    takePhoto(id).then((buffer) => {
+      sendPhoto(user.email, buffer)
     })
   }
 })
@@ -65,16 +67,3 @@ reader.on('data', data => {
 //     })
 //   }, 2000)
 // })
-
-//   getSignedUrl('example@selleo.com').then((res) => {
-//     // console.log(res.status, res.data.url)
-
-//     console.log(res.data.url)
-//     if(res.status === 200) {
-//       const binary = fs.readFileSync('./face.png')
-//       console.log('binary')
-//       putImage(res.data.url, binary).then((res) => {
-//         console.log(res)
-//       })
-//     }
-//   })

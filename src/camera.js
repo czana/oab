@@ -1,9 +1,5 @@
 import { Raspistill } from 'node-raspistill'
 
-export const filePath = (id) => {
-  return `./images/${id}.png`
-}
-
 export default id => {
   return new Raspistill({
     mode: 'photo',
@@ -13,6 +9,6 @@ export default id => {
     height: 720,
     encoding: 'png',
     time: 1000,
-    shutterspeed: 10000
+    shutterspeed: 15000
   }).takePhoto()
 }
