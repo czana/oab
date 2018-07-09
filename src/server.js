@@ -37,6 +37,7 @@ io.on('connection', client => {
 
     if (result.win) {
       const reward = result.cashPrize ? '$$$' : '2 Kudos!'
+      servo.move()
       slack.post(user.mention, result.icon, reward)
     }
   })
