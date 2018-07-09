@@ -5,6 +5,7 @@ import getUser from './users'
 import http from 'http'
 import reader, { parseData } from './rfid'
 import redis from 'redis'
+import servo from './servo'
 import sendPhoto from './queue'
 import Slack from './slack'
 import socketIO from 'socket.io'
@@ -55,6 +56,8 @@ reader.on('data', data => {
       if (true) {
       // if (response !== null) {
         readyForSpin = false
+
+        servo.move() // tmp
 
         socketClient.emit('SPIN_REQUEST', user.index)
 
