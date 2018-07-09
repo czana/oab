@@ -1,5 +1,5 @@
 import SlackWebhook from 'slack-webhook'
-import { times } from 'lodash'
+import { times, join } from 'lodash'
 
 export default class Slack {
   constructor(webhook, logWebhook) {
@@ -8,7 +8,7 @@ export default class Slack {
   }
 
   post(winner, icon, reward) {
-    const result = times(3, () => `:slot_${icon}:`)
+    const result = join(times(3, () => `:slot_${icon}:`), '')
 
     this.slack.send({
       text: `<!here> <@${winner}> just got ${result} and won ${reward}!`,
