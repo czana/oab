@@ -53,16 +53,10 @@ reader.on('data', data => {
   }
 
   if (readyForSpin) {
-    redisClient.set(id, true, 'EX', 60, 'NX', (_, response) => {
-      if (true) {
-        // if (response !== null) {
+    redisClient.set(id, true, 'EX', 14400, 'NX', (_, response) => {
+      if (response !== null) {
         readyForSpin = false
-
-        if (isFinite(user.index)) {
-          socketClient.emit('SPIN_REQUEST', user.index)
-        } else {
-          socketClient.emit('SPIN_REQUEST')
-        }
+        socketClient.emit('SPIN_REQUEST')
 
         takePhoto(id).then(_ => {
           // sendPhoto(user.email, id)
