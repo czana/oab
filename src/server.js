@@ -19,7 +19,7 @@ const server = http.createServer(app)
 
 const io = socketIO(server)
 const redisClient = redis.createClient()
-const slack = new Slack(process.env.SLACK_WEBHOOK, process.env.SLACK_WEBHOOK)
+const slack = new Slack(process.env.SLACK_WEBHOOK, process.env.SLACK_LOG_WEBHOOK)
 
 let readyForSpin = false
 let socketClient = null
