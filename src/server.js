@@ -65,15 +65,15 @@ function _generateCooldownMessage(rollEpoch) {
   let format;
 
   if (seconds > 3600) {
-    format = 'H [godz.] m [min.]'
+    format = 'H [hours and] m [minutes]'
   } else if (seconds > 60) {
-    format = 'm [min.]'
+    format = 'm [minutes]'
   } else {
-    format = '[tylko] s [sek.] :)'
+    format = '[only] s [seconds] :)'
   }
 
   const time = duration.format(format).toString()
-  return 'Niedawno losowałeś. Musisz poczekać ' + time
+  return 'You need to wait ' + time + ' for the next roll!'
 };
 
 io.on('connection', client => {
