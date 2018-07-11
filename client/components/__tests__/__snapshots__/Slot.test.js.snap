@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Slot /> render 1`] = `
+<div
+  className="slot"
+  style={
+    Object {
+      "transform": "translateZ(undefinedpx) translateY(undefinedpx) rotateX(undefineddeg)",
+    }
+  }
+>
+  <img
+    src="test-file-stub"
+  />
+</div>
+`;

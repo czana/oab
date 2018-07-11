@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Roller /> render 1`] = `
+<div
+  className="roller-wrapper undefined"
+>
+  <div
+    className="styles-roller-undefined"
+  />
+  <div
+    className="roller undefined"
+    style={
+      Object {
+        "height": "undefinedpx",
+        "transformOrigin": "0 50% -NaNpx",
+        "width": "undefinedpx",
+      }
+    }
+  />
+</div>
+`;

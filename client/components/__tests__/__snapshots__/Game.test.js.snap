@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Game /> render 1`] = `
+<div
+  className="rollers"
+>
+  <div
+    className="Toastify"
+  />
+  <div
+    className="overlay"
+  />
+  <div
+    className="roller-wrapper left"
+  >
+    <div
+      className="styles-roller-left"
+    />
+    <div
+      className="roller left"
+      style={
+        Object {
+          "height": "170px",
+          "transformOrigin": "0 50% -261.6031006598966px",
+          "width": "210px",
+        }
+      }
+    />
+  </div>
+  <div
+    className="roller-wrapper center"
+  >
+    <div
+      className="styles-roller-center"
+    />
+    <div
+      className="roller center"
+      style={
+        Object {
+          "height": "170px",
+          "transformOrigin": "0 50% -261.6031006598966px",
+          "width": "210px",
+        }
+      }
+    />
+  </div>
+  <div
+    className="roller-wrapper right"
+  >
+    <div
+      className="styles-roller-right"
+    />
+    <div
+      className="roller right"
+      style={
+        Object {
+          "height": "170px",
+          "transformOrigin": "0 50% -261.6031006598966px",
+          "width": "210px",
+        }
+      }
+    />
+  </div>
+</div>
+`;
