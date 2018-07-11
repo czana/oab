@@ -138,6 +138,50 @@ const USERS = {
   4402148018063: {
     mention: 'lemon',
     email: 'l.gawel@selleo.com'
+  },
+  4402148020376: {
+    mention: 'pommy',
+    email: 'k.pomykacz@selleo.com'
+  },
+  5501522899144: {
+    mention: 'mark',
+    email: 'm.caputa@selleo.com'
+  },
+  5501425332945: {
+    mention: 'beu',
+    email: 'r.jedryszczak@selleo.com'
+  },
+  5501561213025: {
+    mention: 'dude',
+    email: 'p.duda@selleo.com'
+  },
+  4402038631671: {
+    mention: 'dadesigner',
+    email: 'l.siwek@selleo.com'
+  },
+  5501555277225: {
+    mention: 'Natalia',
+    email: 'n.milerska@selleo.com'
+  },
+  5501535878785: {
+    mention: 'zebra',
+    email: 'p.wolanin@selleo.com'
+  },
+  4402038639638: {
+    mention: 'Kasia',
+    email: 'k.babinska@selleo.com'
+  },
+  5501561394339: {
+    mention: 'kantorm',
+    email: 'm.kantor@selleo.com'
+  },
+  4402036975254: {
+    mention: 'dominikduda',
+    email: 'd.duda@selleo.com'
+  },
+  5501568626383: {
+    mention: 'bob',
+    email: 'w.bozek@selleo.com'
   }
 }
 
