@@ -1,4 +1,4 @@
-class Polygon {
+export default class Polygon {
   constructor(size, count) {
     this.size = size
     this.count = count
@@ -21,12 +21,5 @@ class Polygon {
   }
 }
 
-export const toRadians = angle => {
-  return angle * (Math.PI / 180)
-}
-
-export const getR = (size, count) => {
-  return size / (2 * Math.tan(Math.PI / count))
-}
-
-export default Polygon
+export const toRadians = angle => angle * (Math.PI / 180)
+export const getR = (size, count) => size / (2 * Math.tan(Math.PI / count))
