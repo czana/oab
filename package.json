@@ -7,7 +7,9 @@
     "client": "webpack-dev-server --optimize-minimize --open --config webpack.dev.js",
     "server": "nodemon --exec babel-node src/server.js --ignore client",
     "start": "concurrently \"yarn server\" \"yarn client\"",
-    "build": "concurrently \"webpack --config webpack.prod.js\" \"babel-node src/server.js\""
+    "build": "concurrently \"webpack --config webpack.prod.js\" \"babel-node src/server.js\"",
+    "test": "jest -u --env=jsdom",
+    "test:watch": "jest --watch --env=jsdom"
   },
   "author": "c4",
   "license": "MIT",
@@ -20,6 +22,7 @@
     "moment": "^2.22.2",
     "node-raspistill": "0.0.15",
     "onoff": "^3.1.0",
+    "prop-types": "^15.6.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-toastify": "^4.1.0",
@@ -39,9 +42,11 @@
     "css-loader": "^1.0.0",
     "file-loader": "^1.1.11",
     "html-webpack-plugin": "^3.2.0",
+    "jest": "^23.4.0",
     "lodash": "^4.17.10",
     "node-sass": "^4.9.2",
     "nodemon": "^1.18.1",
+    "react-test-renderer": "^16.4.1",
     "sass-loader": "^7.0.3",
     "style-loader": "^0.21.0",
     "url-loader": "^1.0.1",
@@ -64,5 +69,10 @@
     "semi": false,
     "singleQuote": true,
     "printWidth": 100
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/client/jest/fileMock.js"
+    }
   }
 }
