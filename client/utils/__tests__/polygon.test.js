@@ -10,6 +10,8 @@ describe('toRadians', () => {
 
 describe('getR', () => {
   test('should return radius', () => {
-    expect(getR(2, 4).toFixed(10)).toEqual('1.0000000000')
+    const e = 0.0000000001
+
+    expect(Math.abs(getR(2, 4) - 1)).toBeLessThan(e)
   })
 })
