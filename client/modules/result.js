@@ -1,6 +1,6 @@
 import uniq from 'lodash/uniq'
 
-const ICONS = [
+export const ICONS = [
   'seven',
   'cherry',
   'diamond',
@@ -19,8 +19,8 @@ export const logResult = state => {
 
 export const resultResponse = result => {
   const uniqResult = uniq(Object.values(result))
-  const win = uniqResult.length == 1
-  const icon = win ? ICONS[uniqResult[0]] : null
+  const win = uniqResult.length === 1
+  const icon = win && ICONS[uniqResult[0]]
   const cashPrize = icon === 'seven'
 
   return { win, icon, cashPrize }
