@@ -5,7 +5,7 @@ exports[`<Slot /> render 1`] = `
   className="slot"
   style={
     Object {
-      "transform": "translateZ(undefinedpx) translateY(undefinedpx) rotateX(undefineddeg)",
+      "transform": "translateZ(10px) translateY(10px) rotateX(10deg)",
     }
   }
 >

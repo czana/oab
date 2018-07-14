@@ -5,7 +5,7 @@ import random from 'lodash/random'
 
 import Slot from './Slot'
 import Animation from './Animation'
-import Polygon, { getR } from '../modules/polygon'
+import Polygon, { getR } from '../utils/polygon'
 
 export default class Roller extends React.Component {
   constructor(props) {

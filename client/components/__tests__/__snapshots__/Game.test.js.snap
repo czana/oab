@@ -25,7 +25,128 @@ exports[`<Game /> render 1`] = `
           "width": "210px",
         }
       }
-    />
+    >
+      <div
+        className="slot"
+        style={
+          Object {
+            "transform": "translateZ(0px) translateY(0px) rotateX(0deg)",
+          }
+        }
+      >
+        <img
+          src="test-file-stub"
+        />
+      </div>
+      <div
+        className="slot"
+        style={
+          Object {
+            "transform": "translateZ(-49.96174644486021px) translateY(153.76644452187057px) rotateX(-36deg)",
+          }
+        }
+      >
+        <img
+          src="test-file-stub"
+        />
+      </div>
+      <div
+        className="slot"
+        style={
+          Object {
+            "transform": "translateZ(-180.7632967748085px) translateY(248.79933356561165px) rotateX(-72deg)",
+          }
+        }
+      >
+        <img
+          src="test-file-stub"
+        />
+      </div>
+      <div
+        className="slot"
+        style={
+          Object {
+            "transform": "translateZ(-342.44290454498463px) translateY(248.79933356561168px) rotateX(-108deg)",
+          }
+        }
+      >
+        <img
+          src="test-file-stub"
+        />
+      </div>
+      <div
+        className="slot"
+        style={
+          Object {
+            "transform": "translateZ(-473.24445487493296px) translateY(153.7664445218706px) rotateX(-144deg)",
+          }
+        }
+      >
+        <img
+          src="test-file-stub"
+        />
+      </div>
+      <div
+        className="slot"
+        style={
+          Object {
+            "transform": "translateZ(-523.2062013197932px) translateY(3.203713998701652e-14px) rotateX(-180deg)",
+          }
+        }
+      >
+        <img
+          src="test-file-stub"
+        />
+      </div>
+      <div
+        className="slot"
+        style={
+          Object {
+            "transform": "translateZ(-473.244454874933px) translateY(-153.76644452187054px) rotateX(-216deg)",
+          }
+        }
+      >
+        <img
+          src="test-file-stub"
+        />
+      </div>
+      <div
+        className="slot"
+        style={
+          Object {
+            "transform": "translateZ(-342.4429045449847px) translateY(-248.79933356561165px) rotateX(-252deg)",
+          }
+        }
+      >
+        <img
+          src="test-file-stub"
+        />
+      </div>
+      <div
+        className="slot"
+        style={
+          Object {
+            "transform": "translateZ(-180.76329677480857px) translateY(-248.79933356561168px) rotateX(-288deg)",
+          }
+        }
+      >
+        <img
+          src="test-file-stub"
+        />
+      </div>
+      <div
+        className="slot"
+        style={
+          Object {
+            "transform": "translateZ(-49.96174644486024px) translateY(-153.76644452187062px) rotateX(-324deg)",
+          }
+        }
+      >
+        <img
+          src="test-file-stub"
+        />
+      </div>
+    </div>
   </div>
   <div
     className="roller-wrapper center"
@@ -42,7 +163,128 @@ exports[`<Game /> render 1`] = `
           "width": "210px",
         }
       }
-    />
+    >
+      <div
+        className="slot"
+        style={
+          Object {
+            "transform": "translateZ(0px) translateY(0px) rotateX(0deg)",
+          }
+        }
+      >
+        <img
+          src="test-file-stub"
+        />
+      </div>
+      <div
+        className="slot"
+        style={
+          Object {
+            "transform": "translateZ(-49.96174644486021px) translateY(153.76644452187057px) rotateX(-36deg)",
+          }
+        }
+      >
+        <img
+          src="test-file-stub"
+        />
+      </div>
+      <div
+        className="slot"
+        style={
+          Object {
+            "transform": "translateZ(-180.7632967748085px) translateY(248.79933356561165px) rotateX(-72deg)",
+          }
+        }
+      >
+        <img
+          src="test-file-stub"
+        />
+      </div>
+      <div
+        className="slot"
+        style={
+          Object {
+            "transform": "translateZ(-342.44290454498463px) translateY(248.79933356561168px) rotateX(-108deg)",
+          }
+        }
+      >
+        <img
+          src="test-file-stub"
+        />
+      </div>
+      <div
+        className="slot"
+        style={
+          Object {
+            "transform": "translateZ(-473.24445487493296px) translateY(153.7664445218706px) rotateX(-144deg)",
+          }
+        }
+      >
+        <img
+          src="test-file-stub"
+        />
+      </div>
+      <div
+        className="slot"
+        style={
+          Object {
+            "transform": "translateZ(-523.2062013197932px) translateY(3.203713998701652e-14px) rotateX(-180deg)",
+          }
+        }
+      >
+        <img
+          src="test-file-stub"
+        />
+      </div>
+      <div
+        className="slot"
+        style={
+          Object {
+            "transform": "translateZ(-473.244454874933px) translateY(-153.76644452187054px) rotateX(-216deg)",
+          }
+        }
+      >
+        <img
+          src="test-file-stub"
+        />
+      </div>
+      <div
+        className="slot"
+        style={
+          Object {
+            "transform": "translateZ(-342.4429045449847px) translateY(-248.79933356561165px) rotateX(-252deg)",
+          }
+        }
+      >
+        <img
+          src="test-file-stub"
+        />
+      </div>
+      <div
+        className="slot"
+        style={
+          Object {
+            "transform": "translateZ(-180.76329677480857px) translateY(-248.79933356561168px) rotateX(-288deg)",
+          }
+        }
+      >
+        <img
+          src="test-file-stub"
+        />
+      </div>
+      <div
+        className="slot"
+        style={
+          Object {
+            "transform": "translateZ(-49.96174644486024px) translateY(-153.76644452187062px) rotateX(-324deg)",
+          }
+        }
+      >
+        <img
+          src="test-file-stub"
+        />
+      </div>
+    </div>
   </div>
   <div
     className="roller-wrapper right"
@@ -59,7 +301,128 @@ exports[`<Game /> render 1`] = `
           "width": "210px",
         }
       }
-    />
+    >
+      <div
+        className="slot"
+        style={
+          Object {
+            "transform": "translateZ(0px) translateY(0px) rotateX(0deg)",
+          }
+        }
+      >
+        <img
+          src="test-file-stub"
+        />
+      </div>
+      <div
+        className="slot"
+        style={
+          Object {
+            "transform": "translateZ(-49.96174644486021px) translateY(153.76644452187057px) rotateX(-36deg)",
+          }
+        }
+      >
+        <img
+          src="test-file-stub"
+        />
+      </div>
+      <div
+        className="slot"
+        style={
+          Object {
+            "transform": "translateZ(-180.7632967748085px) translateY(248.79933356561165px) rotateX(-72deg)",
+          }
+        }
+      >
+        <img
+          src="test-file-stub"
+        />
+      </div>
+      <div
+        className="slot"
+        style={
+          Object {
+            "transform": "translateZ(-342.44290454498463px) translateY(248.79933356561168px) rotateX(-108deg)",
+          }
+        }
+      >
+        <img
+          src="test-file-stub"
+        />
+      </div>
+      <div
+        className="slot"
+        style={
+          Object {
+            "transform": "translateZ(-473.24445487493296px) translateY(153.7664445218706px) rotateX(-144deg)",
+          }
+        }
+      >
+        <img
+          src="test-file-stub"
+        />
+      </div>
+      <div
+        className="slot"
+        style={
+          Object {
+            "transform": "translateZ(-523.2062013197932px) translateY(3.203713998701652e-14px) rotateX(-180deg)",
+          }
+        }
+      >
+        <img
+          src="test-file-stub"
+        />
+      </div>
+      <div
+        className="slot"
+        style={
+          Object {
+            "transform": "translateZ(-473.244454874933px) translateY(-153.76644452187054px) rotateX(-216deg)",
+          }
+        }
+      >
+        <img
+          src="test-file-stub"
+        />
+      </div>
+      <div
+        className="slot"
+        style={
+          Object {
+            "transform": "translateZ(-342.4429045449847px) translateY(-248.79933356561165px) rotateX(-252deg)",
+          }
+        }
+      >
+        <img
+          src="test-file-stub"
+        />
+      </div>
+      <div
+        className="slot"
+        style={
+          Object {
+            "transform": "translateZ(-180.76329677480857px) translateY(-248.79933356561168px) rotateX(-288deg)",
+          }
+        }
+      >
+        <img
+          src="test-file-stub"
+        />
+      </div>
+      <div
+        className="slot"
+        style={
+          Object {
+            "transform": "translateZ(-49.96174644486024px) translateY(-153.76644452187062px) rotateX(-324deg)",
+          }
+        }
+      >
+        <img
+          src="test-file-stub"
+        />
+      </div>
+    </div>
   </div>
 </div>
 `;

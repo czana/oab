@@ -5,7 +5,11 @@ import Slot from '../Slot'
 describe('<Slot />', () => {
   const defaultProps = {
     polygon: {
-      valuesFor: () => ({})
+      valuesFor: () => ({
+        translateZ: 10,
+        translateY: 10,
+        rotateX: 10
+      })
     },
     number: 0
   }
