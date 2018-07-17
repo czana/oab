@@ -4,14 +4,16 @@ import socketIOClient from 'socket.io-client'
 import { logResult, resultResponse } from '../modules/result'
 import { ToastContainer, toast } from 'react-toastify'
 
+import withSocket from '@wrappers/withSocket'
+import AdminPanel from '@components/admin-panel/AdminPanel'
+
 const ROLLERS = ['left', 'center', 'right']
 
-export default class Game extends React.Component {
+class Game extends React.Component {
   constructor(props) {
     super(props)
 
     this.state = {}
-    this.socket = socketIOClient('http://localhost:3000')
 
     ROLLERS.forEach(roller => {
       this[roller] = React.createRef()
@@ -19,8 +21,9 @@ export default class Game extends React.Component {
   }
 
   componentDidMount() {
-    this.socket.on('SPIN_REQUEST', forcedSpinTo => this._spinMachine(forcedSpinTo))
-    this.socket.on('NOTIFY', (type, message) => toast[type](message))
+    const { socket } = this.props;
+    socket.on('SPIN_REQUEST', forcedSpinTo => this._spinMachine(forcedSpinTo))
+    socket.on('NOTIFY', (type, message) => toast[type](message))
   }
 
   _spinMachine(forcedSpinTo) {
@@ -51,9 +54,12 @@ export default class Game extends React.Component {
     return (
       <div className="rollers">
         <ToastContainer autoClose={5000} position={toast.POSITION.TOP_CENTER} />
+        <AdminPanel />
         <div className="overlay" />
         {this._createRollers()}
       </div>
     )
   }
 }
+
+export default withSocket(Game);

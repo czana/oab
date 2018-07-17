@@ -6,7 +6,6 @@ import http from 'http'
 import reader, { parseData } from './rfid'
 import redis from 'redis'
 import moment from 'moment'
-import servo from './servo'
 import sendPhoto from './queue'
 import Slack from './slack'
 import socketIO from 'socket.io'
@@ -27,12 +26,13 @@ let readyForSpin = false
 let socketClient = null
 let user = null
 
+import handleAdminPanelBroadcasts from './serverModules/handleAdminPanelBroadcasts'
+import handleSpinResult from './serverModules/handleSpinResult'
+
 app.use(webpackMiddleware(webpack(webpackConfig)))
 server.listen(3000)
 
 function _rollRequest(userId) {
-  user = getUser(userId)
-
   if (user === undefined) {
     slack.log(userId)
     socketClient.emit('NOTIFY', 'error', 'please go to @czana')
@@ -82,15 +82,20 @@ io.on('connection', client => {
 
   client.on('SPIN_ENDED', result => {
     readyForSpin = true
-
-    if (result.win) {
-      if (result.cashPrize) servo.move()
-      slack.post(user.mention, result.icon, result.cashPrize ? '$$$' : '2 Kudos!')
-    }
+    handleSpinResult(result, user);
   })
+
+  handleAdminPanelBroadcasts(client);
 })
 
 reader.on('data', data => {
   const userId = parseData(data)
-  _rollRequest(userId)
+  user = getUser(userId)
+
+  if (user && user.admin) {
+    socketClient.emit('SET_ADMIN_PANEL_ACTIVE', true);
+  } else {
+    socketClient.emit('SET_ADMIN_PANEL_ACTIVE', false);
+    _rollRequest(userId)
+  }
 })

@@ -2,6 +2,7 @@ const USERS = {
   5501512322897: {
     mention: 'czana',
     email: 't.czana@selleo.com',
+    admin: true
   },
   4402038631408: {
     mention: 'bart',
