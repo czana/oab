@@ -30,6 +30,22 @@ let user = null
 app.use(webpackMiddleware(webpack(webpackConfig)))
 server.listen(3000)
 
+app.get('/', (req, res) => res.sendFile(__dirname + '/index.html'))
+app.get('/user/:email', ({ params: { email } }, res) => {
+  if (!email) {
+    return res.status(400).send('No email param passed')
+  }
+
+  const userId = getUserByEmail(email)
+  if (!userId) {
+    return res.status(400).send('User not found')
+  }
+
+  redisClient.get(userId, (_, response) => {
+    res.status(200).send(response)
+  })
+})
+
 function _rollRequest(userId) {
   user = getUser(userId)
 
@@ -49,20 +65,20 @@ function _rollRequest(userId) {
           takePhoto(userId).then(_ => {
             // sendPhoto(user.email, userId)
           })
-        });
+        })
       } else {
         socketClient.emit('NOTIFY', 'error', _generateCooldownMessage(response))
       }
-    });
+    })
   }
 }
 
 function _generateCooldownMessage(rollEpoch) {
   const cooldownEpoch = parseInt(rollEpoch) + ROLL_COOLDOWN * 1000
-  const duration = moment.utc(moment(cooldownEpoch).diff(+new Date()));
-  const seconds = duration / 1000;
+  const duration = moment.utc(moment(cooldownEpoch).diff(+new Date()))
+  const seconds = duration / 1000
 
-  let format;
+  let format
 
   if (seconds > 3600) {
     format = 'H [hours and] m [minutes]'
