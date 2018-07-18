@@ -1,7 +1,9 @@
+import { findKey } from 'lodash'
+
 const USERS = {
   5501512322897: {
     mention: 'czana',
-    email: 't.czana@selleo.com',
+    email: 't.czana@selleo.com'
   },
   4402038631408: {
     mention: 'bart',
@@ -216,6 +218,8 @@ const USERS = {
     email: 'a.lekawa@selleo.com'
   }
 }
+
+export const getUserByEmail = email => findKey(USERS, { email: email })
 
 export default id => {
   return USERS[id]
