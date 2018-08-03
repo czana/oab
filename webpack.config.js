@@ -1,10 +1,16 @@
 import HtmlWebpackPlugin from 'html-webpack-plugin'
+import path from 'path'
 
 export default {
   mode: 'development',
   entry: './client/index.jsx',
   resolve: {
-    extensions: ['.js', '.jsx', '.scss']
+    extensions: ['.js', '.jsx', '.scss'],
+    alias: {
+      '@components': path.resolve(__dirname, 'client/components'),
+      '@styles': path.resolve(__dirname, 'client/styles'),
+      '@wrappers': path.resolve(__dirname, 'client/wrappers')
+    }
   },
   output: {
     path: '/',
