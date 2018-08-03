@@ -14,6 +14,7 @@ import takePhoto from './camera'
 import webpack from 'webpack'
 import webpackConfig from '../webpack.config.js'
 import webpackMiddleware from 'webpack-dev-middleware'
+import playSound from './playSound'
 
 const app = express()
 const server = http.createServer(app)
@@ -84,6 +85,7 @@ io.on('connection', client => {
     readyForSpin = true
 
     if (result.win) {
+      playSound('src/sound/mlg.mp3')
       if (result.cashPrize) servo.move()
       slack.post(user.mention, result.icon, result.cashPrize ? '$$$' : '2 Kudos!')
     }

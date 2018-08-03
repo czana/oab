@@ -16,6 +16,7 @@
     "moment": "^2.22.2",
     "node-raspistill": "0.0.15",
     "onoff": "^3.1.0",
+    "python-shell": "^0.5.0",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-toastify": "^4.1.0",
