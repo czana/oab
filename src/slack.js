@@ -7,13 +7,17 @@ export default class Slack {
     this.logSlack = new SlackWebhook(logWebhook)
   }
 
-  post(winner, icon, reward) {
+  post(winner, icon, reward, dev) {
     const result = join(times(3, () => `:slot_${icon}:`), '')
-
-    this.slack.send({
+    const payload = {
       text: `<!here> <@${winner}> just got ${result} and won ${reward}!`,
       username: 'Slot Machine'
-    })
+    }
+    if (dev) {
+      this.logSlack.send(payload)
+    } else {
+      this.slack.send(payload)
+    }
   }
 
   log(message) {

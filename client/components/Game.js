@@ -1,17 +1,15 @@
 import React from 'react'
 import Roller from './Roller'
-import socketIOClient from 'socket.io-client'
 import { resultResponse } from '../modules/result'
-import { ToastContainer, toast } from 'react-toastify'
+import { Link } from 'react-router-dom'
 
 const ROLLERS = ['left', 'center', 'right']
 
 export default class Game extends React.Component {
   constructor(props) {
     super(props)
-
     this.state = {}
-    this.socket = socketIOClient('http://localhost:3000')
+    this.socket = props.socket
 
     ROLLERS.forEach(roller => {
       this[roller] = React.createRef()
@@ -20,7 +18,9 @@ export default class Game extends React.Component {
 
   componentDidMount() {
     this.socket.on('SPIN_REQUEST', forcedSpinTo => this._spinMachine(forcedSpinTo))
-    this.socket.on('NOTIFY', (type, message) => toast[type](message))
+    this.socket.on('ADMIN', () => {
+      props.history.push('/adminpanel')
+    })
   }
 
   _spinMachine(forcedSpinTo) {
@@ -29,7 +29,6 @@ export default class Game extends React.Component {
     Promise.all(spins).then(results => {
       const state = Object.values(results).reduce((a, v) => ({ ...a, ...v }), {})
       this.setState(state)
-
       this.socket.emit('SPIN_ENDED', resultResponse(state))
     })
   }
@@ -49,10 +48,21 @@ export default class Game extends React.Component {
 
   render() {
     return (
-      <div className="rollers">
-        <ToastContainer autoClose={5000} position={toast.POSITION.TOP_CENTER} />
-        <div className="overlay" />
-        {this._createRollers()}
+      <div id="game">
+        <div className="rollers">
+          <div className="overlay" />
+          {this._createRollers()}
+          <div
+              style={{
+                'z-index': '9999',
+                position: 'absolute',
+                background: 'rgba(255,12,34,0.5)',
+                padding: '12px'
+              }}
+          >
+            <Link to="/adminpanel">AdminPanel</Link>
+          </div>
+        </div>
       </div>
     )
   }

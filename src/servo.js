@@ -15,5 +15,4 @@ class Servo {
     }, this.delay)
   }
 }
-
 export default new Servo(17, 4000)
