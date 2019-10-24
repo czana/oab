@@ -14,7 +14,8 @@ export const USERS = {
   },
   4402038648119: {
     mention: 'm.polakowski',
-    email: 'm.polakowski@selleo.com'
+    email: 'm.polakowski@selleo.com',
+    slackUserId: 'U6S0A54MP'
   },
   5501557468263: {
     mention: 'apawlicka',
@@ -277,4 +278,3 @@ export const USERS = {
 export default id => {
   return USERS[id]
 }
-
