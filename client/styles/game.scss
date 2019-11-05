@@ -1,12 +1,36 @@
+$background-gradient: linear-gradient(0deg, #1f1f1f 0%, #545454 50%, #1f1f1f 100%);
+$background-color: #1f1f1f;
+
 body {
   margin: 0;
   overflow: hidden;
 }
 
+#app {
+  width: 800px;
+  height: 480px;
+  background-color: #efefef;
+
+  .btn {
+    padding: 8px 24px;
+    border-radius: 8px;
+    font-size: 32px;
+    text-align: center;
+    border: 2px solid #121212;
+    text-decoration: none;
+    background: #d5d5d5;
+    color: #121212;
+    cursor: pointer;
+
+    &:hover {
+      background: darken(#d5d5d5, 20%);
+    }
+  }
+}
+
 #game {
   width: 800px;
   height: 480px;
-  background-color: #EFEFEF;
 
   .rollers {
     width: inherit;
@@ -44,7 +68,7 @@ body {
     position: absolute;
     backface-visibility: hidden;
     border-top: 1px solid #666;
-    border-bottom: 2px solid #FFF;
+    border-bottom: 2px solid #fff;
 
     display: flex;
     justify-content: center;
@@ -62,5 +86,92 @@ body {
     height: inherit;
     background-image: url('../images/slots.png');
     z-index: 1;
+  }
+}
+
+#adminpanel {
+  background: $background-color;
+  background: $background-gradient;
+  width: 100%;
+  height: 100%;
+  #panel {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-rows: 1fr 2fr repeat(3, 1fr);
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-areas: 'left-sidebar . exit' 'left-sidebar . .' 'left-sidebar . stats' 'left-sidebar . .' 'last-user last-user last-user';
+
+    .sidebar {
+      grid-area: left-sidebar;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      margin: 16px;
+
+      .btn {
+        place-self: stretch;
+        font-size: 24px;
+      }
+    }
+    .btn {
+      place-self: center end;
+      margin-right: 16px;
+    }
+    .btn-exit {
+      grid-area: exit;
+    }
+
+    .btn-stats {
+      grid-area: stats;
+    }
+
+    .last-user {
+      grid-area: last-user;
+      background: rgba(0, 0, 0, 0.1);
+      color: #efefef;
+      place-self: stretch;
+      text-align: center;
+      font-size: 32px;
+      font-weight: bold;
+    }
+  }
+  #stats {
+    display: grid;
+    grid-template-rows: 1fr 1fr 4fr;
+    grid-template-columns: 2fr 1fr;
+    grid-template-areas: 'rollsCount back' 'users .' 'users-table users-table';
+    color: white;
+    height: 100%;
+    width: 100%;
+
+    h1 {
+      padding-left: 16px;
+    }
+    .rolls-count {
+      grid-area: rollsCount;
+    }
+    .users-header {
+      grid-area: users;
+    }
+    .users-table {
+      grid-area: users-table;
+      text-align: center;
+      overflow-y: auto;
+
+      table {
+        font-size: 24px;
+        width: 100%;
+
+        thead {
+          color: gold;
+        }
+      }
+    }
+    .btn-back {
+      grid-area: back;
+      place-self: center end;
+      margin-right: 16px;
+    }
   }
 }
