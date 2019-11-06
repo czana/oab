@@ -21,7 +21,7 @@
     "node-raspistill": "0.0.15",
     "onoff": "^3.1.0",
     "react": "^16.4.1",
-    "react-dom": "^16.4.1",
+    "react-dom": "^16.4.2",
     "react-toastify": "^4.1.0",
     "redis": "^2.8.0",
     "serialport": "^6.2.1",
