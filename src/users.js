@@ -68,7 +68,7 @@ export const USERS = {
     email: 'j.kisiolek@selleo.com'
   },
   5498835649833: {
-    mention: 'robert',
+    mention: 'robson',
     email: 'r.harezlak@selleo.com'
   },
   4402037015153: {
